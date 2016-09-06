@@ -27,6 +27,6 @@
     "require-dev": {
         "phpunit/phpunit":         "~3.7",
         "phake/phake":             "2.0.*@dev",
-        "brown298/test_extension": "1.0"
+        "brown298/test_extension": "dev-master"
     }
 }

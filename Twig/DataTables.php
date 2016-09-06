@@ -244,6 +244,7 @@ class DataTables extends \Twig_Extension
                 $this->defaults['bSort']           = $table->sortable;
                 $this->defaults['bFilter']         = $table->searchable;
                 $this->defaults['sPaginationType'] = $table->paginationType;
+                $this->defaults['language']        = $table->language;
             }
 
             // column data
@@ -340,6 +341,7 @@ class DataTables extends \Twig_Extension
             'aaSortingFixed',
             'aoColumnDefs',
             'columnDefs',
+            'language',
             'bLengthChange',
             'bFilter',
             'order',
@@ -358,6 +360,12 @@ class DataTables extends \Twig_Extension
         $results = array();
 
         // custom conversions
+        if(isset($this->params['language'])) 
+        {
+            $this->params['language'] = '{"url": "'.$this->params['language'].'" }';
+            
+        }
+        
         if (isset($this->params['order'])) {
             $this->params['order'] = [$this->count, 'asc'];
         }

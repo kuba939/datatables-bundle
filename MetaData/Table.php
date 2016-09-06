@@ -81,4 +81,10 @@ class Table
      * @var string repository function to call to get query builder
      */
     public $queryBuilder = null;
+    
+    /**
+     * @var string 
+     * lang link https://datatables.net/plug-ins/i18n/
+     */
+    public $language = 'http://cdn.datatables.net/plug-ins/1.10.12/i18n/Polish.json';
 }

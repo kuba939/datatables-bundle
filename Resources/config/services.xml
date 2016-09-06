@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Services-->
+        <parameter key="data_tables.service.class">Brown298\DataTablesBundle\Service\ServerProcessService</parameter>
+        <parameter key="data_tables.reader.class">Doctrine\Common\Annotations\AnnotationReader</parameter>
+        <parameter key="data_tables.manager.class">Brown298\DataTablesBundle\Service\TableManager</parameter>
+        <parameter key="data_tables.cache.serviceName"></parameter>
+
+        <!-- twig extensions -->
+        <parameter key="data_tables.twig.extension.class">Brown298\DataTablesBundle\Twig\DataTables</parameter>
+
+        <parameter key="data_tables.config_search_path" type="collection">
+            <parameter>dataTable</parameter>
+        </parameter>
+
+        <parameter key="data_tables.annotation_search_path" type="collection">
+            <parameter>DataTables</parameter>
+            <parameter>Model</parameter>
+            <parameter>Entity</parameter>
+        </parameter>
+
+    </parameters>
+    <services>
+        <!-- Services-->
+        <service id="data_tables.annotation_reader" class="%data_tables.reader.class%" />
+        <service id="data_tables.service" class="%data_tables.service.class%" />
+        <service id="data_tables.manager" class="%data_tables.manager.class%" >
+            <argument type="service" id="service_container" />
+            <argument type="service" id="data_tables.annotation_reader" />
+            <argument>%data_tables.config_search_path%</argument>
+            <argument>%data_tables.annotation_search_path%</argument>
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%data_tables.cache.serviceName%</argument>
+        </service>
+
+        <!-- twig extensions -->
+        <service id="data_tables.twig.extension" class="%data_tables.twig.extension.class%">
+            <tag name="twig.extension" />
+        </service>
+
+    </services>
+
+</container>

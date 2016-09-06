@@ -1,0 +1,43 @@
+{% set colCount = 0 %}
+{% import _self as tableForms %}
+{% macro headerFilter(column, form) %}{% spaceless %}
+    {% set displayed = false %}
+    {% for name,element in form %}
+        {% if (element.vars.attr.column is defined and element.vars.attr.column == column) %}
+            {% set displayed = true %}
+            {{ form_label(element) }}
+            {{ form_widget(element) }}
+        {% endif %}
+    {% endfor %}
+{% endspaceless %}{% endmacro %}
+
+{{ form_start(filterForm) }}
+    <table class="{{ params['table_class'] }}" id="{{ params['id'] }}">
+        <thead>
+            <tr>{% spaceless %}
+
+                {% for column in columns %}
+                <th class="header-filter {{ column|lower }}_header" id="col_{{ colCount }}">{% set colCount=colCount+1 %}
+                    <span class="anchor {{ column }}">{{ column }}</span><span class="sort icon">Sort</span>
+                    <span class="currentFilters"></span>
+                    {% set filter = tableForms.headerFilter(column,filterForm) %}
+                    {% if filter|length > 0 %}
+                    <div class="hidden header-filter-form">
+                        {% embed "Brown298DataTablesBundle:Form:filterForm.html.twig" %}
+                            {% block filterForm %}
+                                {{ filter }}
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    {% endif %}
+                </th>
+                {% endfor %}
+
+            {% endspaceless %}</tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="hidden">
+        {{ form_rest(filterForm) }}
+    </div>
+{{ form_end(filterForm) }}

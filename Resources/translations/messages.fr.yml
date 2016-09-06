@@ -1,0 +1,3 @@
+data_tables:
+    unknown_value: "Inconnu"
+    unknown_value_at: "Valeur inconnue pour %current%"

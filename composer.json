@@ -1,5 +1,5 @@
 {
-    "name": "brown298/data-tables-bundle",
+    "name": "soft2b/data-tables-bundle",
     "type": "symfony-bundle",
     "homepage": "http://code.rbsolutions.us/datatables/",
     "description": "Adds DataTables functionality to Symfony2",

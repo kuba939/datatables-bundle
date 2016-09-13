@@ -2,7 +2,7 @@
 
 if (typeof dTables === 'undefined') { var dTables = { "tables": {}, "keys": [] };}
 jQuery(document).ready(function() {
-    dTables.tables.{{ rawParams['id'] }} = jQuery('#{{ rawParams['id'] }}').dataTable({{ params|json_encode(constant('JSON_HEX_QUOT'))|convertFunctions|raw }});
+    dTables.tables.{{ rawParams['id'] }} = jQuery('#{{ rawParams['id'] }}').DataTable({{ params|json_encode(constant('JSON_HEX_QUOT'))|convertFunctions|raw }});
     dTables.keys.push('{{ rawParams['id'] }}');
 {% if rawParams['twigVars'] is defined and rawParams['twigVars']['filterForm'] is defined %}
     var anchor = jQuery('form.form-table-header th.header-filter span.anchor');
